@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.model.Certificate" table = "certificates">
+      
+      <meta attribute = "class-description">
+         This class contains the Certificate detail. 
+      </meta>
+      
+      <id name = "id" type = "int" column = "certificate_id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "name" column = "certificate_name" type = "string"/>
+      <property name = "isDeleted" column = "is_deleted" type = "boolean"/>
+      <set name = "employees" cascade = "all" table = "certificate_employee_association" lazy = "false">
+         <key column = "certificate_id"/>
+         <many-to-many column = "employee_id" class = "com.model.Employee"/>
+      </set>
+      
+   </class>
+</hibernate-mapping>
