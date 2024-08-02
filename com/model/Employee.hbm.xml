@@ -1,0 +1,29 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.model.Employee" table = "employees">
+      
+      <meta attribute = "class-description">
+         This class contains the Employee detail. 
+      </meta>
+      
+      <id name = "id" type = "int" column = "employee_id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "name" column = "employee_name" type = "string"/>
+      <property name = "dateOfBirth" column = "date_of_birth" type = "java.time.LocalDate"/>
+      <property name = "phoneNumber" column = "phone_number" type = "long"/>
+      <many-to-one name = "department" column = "department_id" class = "com.model.Department" not-null = "true" lazy = "false"/>
+      <set name = "certificates" cascade = "all" inverse = "true" table = "certificate_employee_association" lazy = "false">
+         <key column = "employee_id"/>
+         <many-to-many column = "certificate_id" class = "com.model.Certificate"/>
+      </set>
+      <property name = "city" column = "city" type = "string"/>
+      <property name = "isDeleted" column = "isDeleted" type = "boolean"/>
+
+   </class>
+</hibernate-mapping>

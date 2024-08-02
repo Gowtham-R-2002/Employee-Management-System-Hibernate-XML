@@ -1,0 +1,25 @@
+<?xml version = "1.0" encoding = "utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+"-//Hibernate/Hibernate Mapping DTD//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+
+<hibernate-mapping>
+   <class name = "com.model.Department" table = "departments">
+      
+      <meta attribute = "class-description">
+         This class contains the Department detail. 
+      </meta>
+      
+      <id name = "id" type = "int" column = "department_id">
+         <generator class="native"/>
+      </id>
+      
+      <property name = "name" column = "department_name" type = "string"/>
+      <property name = "uniqueId" column = "unique_id" type = "string"/>
+      <set name = "employees" cascade = "all" lazy = "false">
+         <key column = "department_id"/>
+         <one-to-many class = "com.model.Employee"/>
+      </set>
+      
+   </class>
+</hibernate-mapping>
